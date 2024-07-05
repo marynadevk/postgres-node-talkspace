@@ -1,5 +1,5 @@
-import { MessageInput } from "./MessageInput";
-import { Messages } from "./Messages";
+import { MessageInput } from './MessageInput';
+import { Messages } from './Messages';
 
 export const MessageContainer = () => {
 	return (

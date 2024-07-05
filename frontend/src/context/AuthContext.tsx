@@ -1,5 +1,5 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { IAuthUser } from "./interfaces/IAuthUser";
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { IAuthUserData } from './interfaces/IAuthUserData';
 import { IAuthContext } from './interfaces/IAuthContext';
 
 const AuthContext = createContext<IAuthContext>({
@@ -14,13 +14,13 @@ export const useAuthContext = () => {
 };
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-	const [authUser, setAuthUser] = useState<IAuthUser | null>(null);
+	const [authUser, setAuthUser] = useState<IAuthUserData | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchAuthUser = async () => {
 			try {
-				const res = await fetch("/api/auth/me");
+				const res = await fetch('/api/auth/me');
 				const data = await res.json();
 				if (!res.ok) {
 					throw new Error(data.error);

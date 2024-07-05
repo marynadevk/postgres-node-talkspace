@@ -1,5 +1,5 @@
-import { DUMMY_MESSAGES } from "../../dummy_data/dummy";
-import { Message } from "./Message";
+import { DUMMY_MESSAGES } from '../../dummy_data/dummy';
+import { Message } from './Message';
 
 export const Messages = () => {
 	return (

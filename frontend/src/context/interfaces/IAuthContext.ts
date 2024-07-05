@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { IAuthUser } from "./IAuthUser";
+import { IAuthUserData } from "./IAuthUserData";
 
 export interface IAuthContext {
-  authUser: IAuthUser | null;
-	setAuthUser: Dispatch<SetStateAction<IAuthUser | null>>;
+  authUser: IAuthUserData | null;
+	setAuthUser: Dispatch<SetStateAction<IAuthUserData | null>>;
 	isLoading: boolean;
 }

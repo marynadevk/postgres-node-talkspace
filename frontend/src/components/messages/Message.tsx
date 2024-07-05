@@ -1,11 +1,11 @@
 export const Message = ({ message }: { message?: any }) => {
 	const fromMe = message.fromMe;
-	const chatClass = fromMe ? "chat-end" : "chat-start";
+	const chatClass = fromMe ? 'chat-end' : 'chat-start';
 	const img = fromMe
-		? "https://avatar.iran.liara.run/public/boy?username=johndoe"
-		: "https://avatar.iran.liara.run/public/boy?username=janedoe";
+		? 'https://avatar.iran.liara.run/public/boy?username=johndoe'
+		: 'https://avatar.iran.liara.run/public/boy?username=janedoe';
 
-	const bubbleBg = fromMe ? "bg-green-500" : "";
+	const bubbleBg = fromMe ? 'bg-green-500' : '';
 	return (
 		<div className={`chat ${chatClass}`}>
 			<div className='hidden md:block chat-image avatar'>
