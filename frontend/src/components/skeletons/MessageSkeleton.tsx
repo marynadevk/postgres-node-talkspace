@@ -1,4 +1,4 @@
-const MessageSkeleton = () => {
+export const MessageSkeleton = () => {
 	return (
 		<>
 			<div className='flex gap-3 items-center'>
@@ -17,4 +17,3 @@ const MessageSkeleton = () => {
 		</>
 	);
 };
-export default MessageSkeleton;
