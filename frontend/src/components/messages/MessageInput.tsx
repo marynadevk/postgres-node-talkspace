@@ -8,7 +8,7 @@ export const MessageInput = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Message:', message);
+    
     if (!message.trim()) return;
     await sendMessage(message);
     setMessage('');

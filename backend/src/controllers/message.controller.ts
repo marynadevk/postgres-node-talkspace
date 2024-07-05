@@ -1,6 +1,7 @@
-import { StatusCodes } from "http-status-codes";
-import { Request, Response } from "express";
-import { prisma } from "../db/prisma.js";
+import { StatusCodes } from 'http-status-codes';
+import { Request, Response } from 'express';
+import { prisma } from '../db/prisma.js';
+import { getReceiverSocketId, io } from '../socket/socket.js';
 
 class MessageController {
   async sendMessage(req: Request, res: Response) {
@@ -30,11 +31,17 @@ class MessageController {
         });
       }
 
+      const receiverSocketId = getReceiverSocketId(receiverId);
+
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit('newMessage', newMessage);
+      }
+
       res.status(StatusCodes.CREATED).json(newMessage);
     } catch (error) {
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: 'Internal Server Error' });
     }
   }
 
@@ -45,7 +52,7 @@ class MessageController {
 
       const conversation = await prisma.conversation.findFirst({
         where: { participantsIds: { hasEvery: [senderId, userToChatId] }},
-        include: { messages: { orderBy: { createdAt: "asc" } } },
+        include: { messages: { orderBy: { createdAt: 'asc' } } },
       });
 
       if (!conversation) {
@@ -56,7 +63,7 @@ class MessageController {
     } catch (error) {
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: 'Internal Server Error' });
     }
   }
 
@@ -73,7 +80,7 @@ class MessageController {
     } catch (error) {
       res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: "Internal Server Error" });
+        .json({ message: 'Internal Server Error' });
     }
   }
 }
