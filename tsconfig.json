@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
-		"outDir": "./backend/dist", // Redirect output structure to the directory.
+		"outDir": "./backend/dist",
 		"rootDir": "./backend",
-		"strict": true, // Enable all strict type-checking options.
-		"esModuleInterop": true, // This will allow you to use default imports with CommonJS modules.
-		"skipLibCheck": true, // this option will skip type checking all .d.ts files.
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["ES2022"],
     "module": "ES2022",
@@ -14,6 +14,6 @@
 	"ts-node": {
 		"esm": true
 	},
-	"include": ["backend/src/**/*"], // Specifies which files to include when compiling your project.
-	"exclude": ["node_modules", "**/*.spec.ts", "frontend"] // Specifies which files to exclude when compiling your project.
+	"include": ["backend/src/**/*"],
+	"exclude": ["node_modules", "**/*.spec.ts", "frontend"]
 }
