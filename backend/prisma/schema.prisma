@@ -27,8 +27,8 @@ model Conversation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  partisipantsIds String[]
-  partisipants User[]
+  participantsIds String[]
+  participants User[]
 
   messagesId String[]
   messages Message[]
@@ -51,3 +51,4 @@ enum Gender {
   male
   female
 }
+
