@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
 	useEffect(() => {
 		const fetchAuthUser = async () => {
-      console.log(authUser)
       if (!authUser) {
         setIsLoading(false);
         return;
