@@ -1,7 +1,8 @@
 import { prisma } from '../db/prisma.js';
 import { ISendMessageData } from '../interfaces/ISendMessageData';
 import { IGetMessagesData } from '../interfaces/IGetMessagesData';
-import { getReceiverSocketId, io } from '../socket/socket.js';
+import { io } from '../socket/socket.js';
+import { getReceiverSocketId } from '../socket/userSocketMap.js';
 
 class MessageService {
   async sendMessage(data: ISendMessageData) {
@@ -38,7 +39,7 @@ class MessageService {
   async getMessages(data: IGetMessagesData) {
     const { userToChatId, senderId } = data;
     return await prisma.conversation.findFirst({
-      where: { participantsIds: { hasEvery: [senderId, userToChatId] }},
+      where: { participantsIds: { hasEvery: [senderId, userToChatId] } },
       include: { messages: { orderBy: { createdAt: 'asc' } } },
     });
   }

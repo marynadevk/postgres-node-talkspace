@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react';
 import { GenderCheckbox } from '../components/GenderCheckbox';
 import { useSignup } from '../hooks/useSignup';
 import { IUserData } from '../interfaces/IUserData';
+import { Toaster } from 'react-hot-toast';
 
 export const SignUp = () => {
   const [inputFields, setInputFields] = useState<IUserData>({
@@ -111,6 +112,7 @@ export const SignUp = () => {
           </div>
         </form>
       </div>
+      <Toaster/>
     </div>
   );
 };

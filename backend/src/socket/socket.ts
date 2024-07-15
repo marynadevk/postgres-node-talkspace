@@ -1,33 +1,18 @@
 import { Server } from 'socket.io';
-import http from 'http';
-import express from 'express';
+import { socketServer } from './server.js';
+import { handleUserConnection, handleUserDisconnection } from './userSocketMap.js';
 
-const app = express();
-
-const server = http.createServer(app);
-const io = new Server(server, {
-	cors: {
-		origin: ['http://localhost:5173'],
-		methods: ['GET', 'POST'],
-	},
+export const io = new Server(socketServer, {
+  cors: {
+    origin: [process.env.WEBSOCKET_CORS_ORIGIN!],
+    methods: ['GET', 'POST'],
+  },
 });
-
-export const getReceiverSocketId = (receiverId: string) => {
-	return userSocketMap[receiverId];
-};
-
-const userSocketMap: { [key: string]: string } = {};
 
 io.on('connection', (socket) => {
-	const userId = socket.handshake.query.userId as string;
+  handleUserConnection(socket);
 
-	if (userId) userSocketMap[userId] = socket.id;
-  
-	io.emit('getOnlineUsers', Object.keys(userSocketMap));
-	socket.on('disconnect', () => {
-		delete userSocketMap[userId];
-		io.emit('getOnlineUsers', Object.keys(userSocketMap));
-	});
+  socket.on('disconnect', () => {
+    handleUserDisconnection(socket);
+  });
 });
-
-export { app, io, server };

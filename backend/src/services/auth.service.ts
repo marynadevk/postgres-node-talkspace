@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import { prisma } from '../db/prisma.js';
-import  bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { ISignupData } from '../interfaces/ISignupData';
 import { ILoginData } from '../interfaces/ILoginData.js';
 import ServerError from '../errors/serverError.js';
@@ -11,7 +11,7 @@ class AuthService {
     const user = await prisma.user.findUnique({ where: { username } });
 
     if (user) {
-      throw new ServerError(StatusCodes.BAD_REQUEST, "Username already exists" );
+      throw new ServerError(StatusCodes.BAD_REQUEST, 'Username already exists');
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -35,20 +35,20 @@ class AuthService {
       username: newUser.username,
       profilePic: newUser.profilePic,
     };
-  };
+  }
 
   async login(userData: ILoginData) {
     const { username, password } = userData;
     const user = await prisma.user.findUnique({ where: { username } });
 
     if (!user) {
-      throw new ServerError(StatusCodes.BAD_REQUEST, "Invalid credentials" );
+      throw new ServerError(StatusCodes.BAD_REQUEST, 'Invalid credentials');
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      throw new ServerError(StatusCodes.BAD_REQUEST, "Invalid credentials" );
+      throw new ServerError(StatusCodes.BAD_REQUEST, 'Invalid credentials');
     }
     return {
       id: user.id,
@@ -60,9 +60,9 @@ class AuthService {
 
   async getMe(userId: string) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-  
+
     if (!user) {
-      throw new ServerError(StatusCodes.NOT_FOUND, "User not found");
+      throw new ServerError(StatusCodes.NOT_FOUND, 'User not found');
     }
 
     return {

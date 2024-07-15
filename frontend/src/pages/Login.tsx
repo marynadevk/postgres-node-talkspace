@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { ILoginData } from '../interfaces/ILoginData';
 import { useLogin } from '../hooks/useLogin';
+import { Toaster } from 'react-hot-toast';
 
 export const Login = () => {
   const [inputFields, setInputFields] = useState<ILoginData>({
@@ -74,6 +75,7 @@ export const Login = () => {
           </div>
         </form>
       </div>
+      <Toaster/>
     </div>
   );
 };
